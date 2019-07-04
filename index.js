@@ -16,10 +16,14 @@ let Git = (dir, command) => {
                 cwd: dir
             });
         stat.stdout.on('data', function (data) {
-            resolve(data.toString());
+           // nothing for now
         });
         stat.stderr.on('data', function (data) {
             reject(data.toString());
+        });
+        stat.on('close', (code) => {
+            //console.log(`child process exited with code ${code}`);
+            resolve();
         });
     });
 };
@@ -28,14 +32,14 @@ let Git = (dir, command) => {
 let dir = path.resolve(process.argv[2] || process.cwd());
 Git(dir, commands.status)
 .then((data) => {
-    console.log(data);
+    //console.log(data);
     console.log('okay looks like we have a git');
     console.log('doing a soft reset...');
     return Git(dir, commands.keepChanges);
 })
-.then(() => {
+.then((data) => {
 
-    console.log('sort reset went well, lets unstage as well...');
+    console.log('soft reset went well, lets unstage as well...');
     return Git(dir, commands.unstage);
 
 })
