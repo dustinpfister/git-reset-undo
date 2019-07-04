@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 let spawn = require('child_process').spawn,
 path = require('path');
 

@@ -1,0 +1,22 @@
+{
+    "name": "git-reset-undo",
+    "version": "1.0.0",
+    "description": "Just a simple git undo command",
+    "main": "index.js",
+    "bin": {
+        "g-undo": "./index.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dustinpfister/git-reset-undo.git"
+    },
+    "author": "Dustin Pfister",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dustinpfister/git-reset-undo/issues"
+    },
+    "homepage": "https://github.com/dustinpfister/git-reset-undo#readme"
+}
