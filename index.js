@@ -10,9 +10,9 @@ let commands = {
 };
 
 let log = function (data, type) {
-    //data = data === undefined ? '' : data;
+    data = data === undefined ? '' : data;
     type = type === undefined ? 'info' : type;
-    console.log(data)
+    console.log(data);
 };
 
 let Git = (dir, command) => {
@@ -23,10 +23,10 @@ let Git = (dir, command) => {
             });
         stat.stdout.on('data', function (data) {
             // nothing for now
-            console.log(data.toString());
+            log(data.toString());
         });
         stat.stderr.on('data', function (data) {
-            console.log(data.toString());
+            log(data.toString());
             reject(data.toString());
         });
         stat.on('close', (code) => {

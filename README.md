@@ -19,4 +19,4 @@ That is all.
 
 ## install
 
-So I just maked
+So I just Okay so
