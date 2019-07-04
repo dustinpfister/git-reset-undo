@@ -10,7 +10,7 @@ let commands = {
 };
 
 let log = function (data, type) {
-    data = data === undefined ? '' : data;
+    //data = data === undefined ? '' : data;
     type = type === undefined ? 'info' : type;
     console.log(data)
 };
@@ -23,14 +23,14 @@ let Git = (dir, command) => {
             });
         stat.stdout.on('data', function (data) {
             // nothing for now
-            log(data,'data');
+            console.log(data.toString());
         });
         stat.stderr.on('data', function (data) {
-            log(data, 'error');
+            console.log(data.toString());
             reject(data.toString());
         });
         stat.on('close', (code) => {
-            //console.log(`child process exited with code ${code}`);
+            log('command over...');
             resolve();
         });
     });
