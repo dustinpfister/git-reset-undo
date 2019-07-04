@@ -19,7 +19,7 @@ let log = function (data, type) {
     if (type === 'error') {
         color = '\u001b[31m';
     }
-    console.log(color + data);
+    console.log(color + data + '\u001b[37m');
 };
 
 let Git = (dir, command) => {
@@ -29,11 +29,9 @@ let Git = (dir, command) => {
                 cwd: dir
             });
         stat.stdout.on('data', function (data) {
-            // nothing for now
             log(data.toString(), 'data');
         });
         stat.stderr.on('data', function (data) {
-            log(data.toString(), 'error');
             reject(data.toString());
         });
         stat.on('close', (code) => {
@@ -58,11 +56,8 @@ Git(dir, commands.status)
     return Git(dir, commands.unstage);
 
 }).then(() => {
-
     log('all done', 'info');
-    log('', 'data');
-
 })
 .catch ((data) => {
-    console.log(data);
+    log(data, 'error');
 });
