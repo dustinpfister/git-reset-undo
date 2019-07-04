@@ -3,12 +3,13 @@ let spawn = require('child_process').spawn,
 path = require('path');
 
 // reset commands for git
-let commands = {
+let gitArgumnets = {
     status: ['status'],
     keepChanges: ['reset', '--soft', 'HEAD~1'],
     unstage: ['reset']
 };
 
+// custom log function
 let log = function (data, type) {
     data = data === undefined ? '' : data;
     type = type === undefined ? 'data' : type;
@@ -22,10 +23,11 @@ let log = function (data, type) {
     console.log(color + data + '\u001b[37m');
 };
 
-let Git = (dir, command) => {
-    command = command === undefined ? commands.status : command;
+// launch a git command
+let Git = (dir, argu) => {
+    argu = argu === undefined ? gitArgumnets.status : argu;
     return new Promise((resolve, reject) => {
-        let stat = spawn('git', command, {
+        let stat = spawn('git', argu, {
                 cwd: dir
             });
         stat.stdout.on('data', function (data) {
@@ -43,17 +45,17 @@ let Git = (dir, command) => {
 
 // start process
 let dir = path.resolve(process.argv[2] || process.cwd());
-Git(dir, commands.status)
+Git(dir, gitArgumnets.status)
 .then((data) => {
     //console.log(data);
     log('okay looks like we have a git', 'info');
     log('doing a soft reset...', 'info');
-    return Git(dir, commands.keepChanges);
+    return Git(dir, gitArgumnets.keepChanges);
 })
 .then((data) => {
 
     log('soft reset went well, lets unstage as well...', 'info');
-    return Git(dir, commands.unstage);
+    return Git(dir, gitArgumnets.unstage);
 
 }).then(() => {
     log('all done', 'info');
