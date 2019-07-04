@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+ # !/usr/bin / env node
 let spawn = require('child_process').spawn,
 path = require('path');
 
@@ -13,6 +13,12 @@ let GitCheck = function () {
             reject(data.toString());
         });
     });
+};
+
+// reset commands for git
+let commands = {
+    keep - changes: 'reset --soft HEAD~1',
+    unstage: 'reset'
 };
 
 // start process
