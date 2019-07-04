@@ -19,4 +19,10 @@ That is all.
 
 ## install
 
-So I just Okay so
+So for now just clone down and install globally
+
+```
+$ git clone https://github.com/dustinpfister/git-reset-undo --depth 1
+$ cd git-reset-undo
+$ npm install -g
+```
