@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+ # !/usr/bin / env node
 let spawn = require('child_process').spawn,
 path = require('path');
 
@@ -12,7 +12,9 @@ let commands = {
 let Git = (dir, command) => {
     command = command === undefined ? commands.status : command;
     return new Promise((resolve, reject) => {
-        let stat = spawn(path.join(dir, 'git'), command);
+        let stat = spawn('git', command, {
+                cwd: dir
+            });
         stat.stdout.on('data', function (data) {
             resolve(data.toString());
         });
@@ -23,7 +25,7 @@ let Git = (dir, command) => {
 };
 
 // start process
-let dir = path.resolve(process.argv[0] || process.cwd);
+let dir = path.resolve(process.argv[2] || process.cwd());
 Git(dir, commands.status)
 .then((data) => {
     console.log(data);
